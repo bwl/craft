@@ -2,6 +2,22 @@
 
 *Trick Gemini into being actually useful*
 
+## Table of Contents
+- [What Actually Happens](#what-actually-happens)
+- [How AI Agents Discover and Use Tools](#how-ai-agents-discover-and-use-tools)
+- [How Tools Are Configured](#how-tools-are-configured)
+- [Fire Up Specialized Agents for Any Task](#fire-up-specialized-agents-for-any-task)
+- [The Problem](#the-problem)
+- [The Solution](#the-solution)
+- [Quick Start](#quick-start)
+- [Built-in Domains](#built-in-domains)
+- [Key Features](#key-features)
+- [Creating Custom Domains](#creating-custom-domains)
+- [Architecture](#architecture)
+- [Advanced Usage](#advanced-usage)
+- [Why Craft CLI?](#why-craft-cli)
+- [Contributing](#contributing)
+
 ### What Actually Happens
 
 **Example 1: Deploy a Writing Assistant**
@@ -32,6 +48,34 @@ When Claude (or any AI agent) needs to accomplish something, they can:
 4. **Execute with confidence**: `./craft linting ruff check --fix` - the system takes over from there
 
 The AI agent just runs `./craft` and the framework handles discovery, validation, and execution. No complex tool management needed.
+
+### How Tools Are Configured
+
+Each tool is defined by a simple YAML file that tells the system:
+
+**Example: `domains/linting/tools/ruff.yaml`**
+```yaml
+name: "RUFF"
+description: "Fast Python linter and code formatter, written in Rust"
+command: "uv run ruff check {args}"
+help: |
+  Usage: craft linting ruff [options] [path]
+  
+  Options:
+    --fix          Automatically fix violations
+    --watch        Run in watch mode
+    
+  Examples:
+    craft linting ruff check --fix src/
+    craft linting ruff check . --watch
+```
+
+**What this means:**
+- `name` & `description`: What the AI agent sees when exploring tools
+- `command`: The actual command that gets executed (with argument substitution)
+- `help`: Context-aware help that explains usage and provides examples
+
+The framework handles all the plumbing - argument passing, error handling, output formatting. You just define what the specialist should do.
 
 > ⚠️ **Friendly Disclaimer**: Most of the features promised below exist but some um... we will get back to you soon, dw 😅
 
