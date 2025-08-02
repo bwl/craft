@@ -12,7 +12,7 @@
 - [Quick Start](#quick-start)
 - [Built-in Domains](#built-in-domains)
 - [Key Features](#key-features)
-- [Creating Custom Domains](#creating-custom-domains)
+- [Configuration System](#configuration-system)
 - [Architecture](#architecture)
 - [Advanced Usage](#advanced-usage)
 - [Why Craft CLI?](#why-craft-cli)
@@ -231,16 +231,50 @@ Beautiful tables, panels, and colors when humans need visual interface:
 craft linting --noob
 ```
 
-## Creating Custom Domains
+## Configuration System
+
+Craft CLI includes built-in domains and supports custom domain paths via configuration files.
+
+### Built-in Domains
+
+Craft CLI comes with these domains out of the box:
+- **linting**: Python code quality tools (ruff, black, mypy)
+- **coding**: Development tools (test, build, git)
+- **slate**: Novel writing tools (embark, namer)
+
+### Custom Domain Configuration
+
+Create `.craftrc` files to add your own domain paths:
+
+**Project-level** (`./.craftrc`):
+```yaml
+domain_paths:
+  - "./my-project-tools"
+  - "./scripts/craft-domains"
+
+config:
+  default_human_mode: true
+```
+
+**User-level** (`~/.config/craft/craftrc`):
+```yaml
+domain_paths:
+  - "~/my-craft-domains"
+  - "/opt/shared-craft-tools"
+
+include_builtin_domains: true  # Default: true
+```
+
+### Creating Custom Domains
 
 ### 1. Create Domain Structure
 ```bash
-mkdir -p domains/mytools
+mkdir -p ~/my-craft-domains/mytools
 ```
 
 ### 2. Add Tools
 ```yaml
-# domains/mytools/mytool.yaml
+# ~/my-craft-domains/mytools/mytool.yaml
 name: "MYTOOL"
 description: "What my tool does"
 command: "python mytool.py {args}"
@@ -258,11 +292,29 @@ craft mytools mytool --help      # Tool help
 craft mytools mytool --verbose   # Run your tool
 ```
 
+### Domain Precedence
+
+When domains have the same name:
+1. **Project-level** domains (from `./.craftrc`)
+2. **User-level** domains (from `~/.config/craft/craftrc`)  
+3. **Built-in** domains (from package)
+
+### First-Time Setup
+
+On first run, Craft CLI will offer to create an example config:
+```bash
+🚀 Welcome to Craft CLI!
+No configuration found. Would you like to create an example config?
+This will create ~/.config/craft/craftrc with sensible defaults.
+Create example config? (y/N): 
+```
+
 ## Architecture
 
-### Simple File Structure
+### Built-in Domain Structure
 ```
-domains/
+craft-cli package includes:
+src/craft_cli/domains/
 ├── linting/
 │   ├── ruff.yaml
 │   ├── black.yaml
@@ -271,8 +323,21 @@ domains/
 │   ├── test.yaml
 │   ├── build.yaml
 │   └── git.yaml
-└── mytools/
-    └── mytool.yaml
+└── slate/
+    ├── embark.yaml
+    └── namer.yaml
+```
+
+### Custom Domain Structure
+```
+User domains can be anywhere:
+~/my-craft-domains/
+├── mytools/
+│   ├── tool1.yaml
+│   └── tool2.yaml
+└── devops/
+    ├── deploy.yaml
+    └── monitor.yaml
 ```
 
 ### Tool Definition Format
@@ -288,10 +353,12 @@ help: |
 ## Advanced Usage
 
 ### Environment Integration
-Craft CLI automatically finds domain directories in:
-1. Current working directory
-2. Parent directories (walks up the tree)
-3. Package installation location
+Craft CLI automatically finds domains from:
+1. **Built-in domains** (included with package)
+2. **Project-level config** (`./.craftrc` in current directory)
+3. **User-level config** (`~/.config/craft/craftrc`)
+
+Domain paths are merged with project-level taking precedence over user-level over built-in.
 
 ### Command Patterns
 ```bash
