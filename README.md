@@ -1,5 +1,7 @@
 # 🚀 Craft CLI Framework
 
+> ⚠️ **Friendly Disclaimer**: Most of the features promised below exist but some um... we will get back to you soon, dw 😅
+
 ## Fire Up Specialized Agents for Any Task
 
 [![PyPI version](https://badge.fury.io/py/craft-cli.svg)](https://badge.fury.io/py/craft-cli)
