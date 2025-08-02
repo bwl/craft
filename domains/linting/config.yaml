@@ -1,0 +1,12 @@
+name: "Python Code Quality Tools"
+description: "Linting, formatting, and code quality tools for Python development"
+version: "1.0.0"
+base_path: "."
+author: "Craft CLI Framework"
+
+# Domain-specific configuration
+settings:
+  python_version: "3.8"
+  line_length: 88
+  max_complexity: 10
+  target_version: "py38"

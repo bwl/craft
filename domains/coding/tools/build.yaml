@@ -1,0 +1,28 @@
+name: "BUILD"
+description: "Build and package Python projects with UV"
+command: "uv {args}"
+category: "build_system"
+help: |
+  Build, package, and manage Python projects using UV package manager.
+  
+  Usage: craft coding build <action> [options]
+  
+  Actions:
+    build           Build wheel and source distributions
+    sync            Install dependencies from lock file
+    add PKG         Add new dependency
+    remove PKG      Remove dependency
+    lock            Update lock file
+    publish         Publish to PyPI
+    
+  Options:
+    --dev           Include development dependencies
+    --all-extras    Install all optional dependencies  
+    --no-cache      Disable package cache
+    --dry-run       Show what would be done without executing
+    
+  Examples:  
+    craft coding build build
+    craft coding build sync --dev
+    craft coding build add pytest --dev
+    craft coding build publish --dry-run

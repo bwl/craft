@@ -1,0 +1,27 @@
+name: "RUFF"
+description: "Fast Python linter and code formatter, written in Rust"
+command: "ruff {args}"
+category: "code_quality"
+help: |
+  Ultra-fast Python linter and formatter for code quality enforcement.
+  
+  Usage: craft linting ruff <action> [options]
+  
+  Actions:
+    check           Run linting checks on Python files
+    format          Format Python code according to style rules
+    --fix           Automatically fix auto-fixable lint violations
+    --watch         Run in watch mode for continuous checking
+    
+  Options:
+    --select=RULES  Select specific rule codes to check
+    --ignore=RULES  Ignore specific rule codes  
+    --config=FILE   Use specific configuration file
+    --verbose       Show verbose output
+    --quiet         Minimize output
+    
+  Examples:
+    craft linting ruff check .
+    craft linting ruff check --fix src/
+    craft linting ruff format --diff
+    craft linting ruff check --select=E,W --ignore=E203

@@ -1,0 +1,22 @@
+name: "MYPY"
+description: "Static type checker for Python"
+command: "mypy {args}"
+category: "type_checking"
+help: |
+  Static type checking for Python code to catch type-related errors.
+  
+  Usage: craft linting mypy [options] [files/modules]
+  
+  Options:
+    --strict        Enable all optional error checking flags
+    --ignore-missing-imports  Ignore missing imports
+    --show-error-codes        Show error codes in messages
+    --config-file=FILE        Use specific config file
+    --cache-dir=DIR           Store cache files in directory
+    --no-error-summary        Don't show error summary
+    
+  Examples:
+    craft linting mypy src/
+    craft linting mypy --strict .
+    craft linting mypy --ignore-missing-imports main.py
+    craft linting mypy --show-error-codes --strict src/

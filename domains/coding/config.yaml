@@ -1,0 +1,12 @@
+name: "Development Workflow Tools"
+description: "Essential development tools for testing, building, and project management"
+version: "1.0.0"
+base_path: "."
+author: "Craft CLI Framework"
+
+# Domain-specific configuration
+settings:
+  test_framework: "pytest"
+  coverage_threshold: 80
+  build_system: "uv"
+  default_python: "3.8"
