@@ -2,16 +2,11 @@
 name = "craft-cli"
 version = "1.0.0"
 description = "Domain-specific tool orchestration framework - Make specialized tools feel like system commands"
-authors = [
-    {name = "SLATE Team", email = "hello@slate-tui.dev"}
-]
+authors = [{ name = "bwl", email = "hello@slate-tui.dev" }]
 readme = "README.md"
-license = {text = "MIT"}
+license = { text = "MIT" }
 requires-python = ">=3.8"
-dependencies = [
-    "pyyaml>=6.0",
-    "rich>=13.0",
-]
+dependencies = ["pyyaml>=6.0", "rich>=13.0"]
 keywords = ["cli", "tools", "domain", "orchestration", "framework"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -31,10 +26,9 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/slate-tui/craft-cli"
-Repository = "https://github.com/slate-tui/craft-cli"
-Documentation = "https://craft-cli.readthedocs.io"
-Issues = "https://github.com/slate-tui/craft-cli/issues"
+Homepage = "https://github.com/bwl/craft"
+Repository = "https://github.com/bwl/craft"
+Issues = "https://github.com/bwl/craft/issues"
 
 [project.scripts]
 craft = "craft_cli.main:main"
@@ -47,11 +41,7 @@ dev = [
     "ruff>=0.1.0",
     "mypy>=1.0",
 ]
-docs = [
-    "mkdocs>=1.5",
-    "mkdocs-material>=9.0",
-    "mkdocs-click>=0.8",
-]
+docs = ["mkdocs>=1.5", "mkdocs-material>=9.0", "mkdocs-click>=0.8"]
 
 [build-system]
 requires = ["hatchling"]
@@ -61,7 +51,7 @@ build-backend = "hatchling.build"
 dev-dependencies = [
     "pytest>=7.0",
     "pytest-cov>=4.0",
-    "black>=23.0", 
+    "black>=23.0",
     "ruff>=0.1.0",
     "mypy>=1.0",
 ]

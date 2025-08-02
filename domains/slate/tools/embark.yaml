@@ -1,6 +1,6 @@
 name: "EMBARK"
 description: "Project initialization protocol with intelligent folder structure"
-command: "echo 'Demo: Would initialize project with {args}'"
+command: "echo 'Demo: EMABARK called - would initialize project with {args}'"
 category: "project_management"
 help: |
   Initialize new novel projects or series with proper folder structure and metadata.

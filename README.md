@@ -2,6 +2,7 @@
 ## a cli to help claude, gemini, etc run specific tasks consistently and helpfully
 
 ## Table of Contents
+- [Installation](#installation)
 - [What Actually Happens](#what-actually-happens)
 - [How AI Agents Discover and Use Tools](#how-ai-agents-discover-and-use-tools)
 - [How Tools Are Configured](#how-tools-are-configured)
@@ -16,6 +17,47 @@
 - [Advanced Usage](#advanced-usage)
 - [Why Craft CLI?](#why-craft-cli)
 - [Contributing](#contributing)
+
+## Installation
+
+### Option 1: Add to Your Project (Recommended)
+```bash
+# If using UV (recommended)
+uv add craft-cli
+
+# If using pip
+pip install craft-cli
+```
+
+### Option 2: Install as Global Tool
+```bash
+# Install globally with UV
+uv tool install craft-cli
+
+# Then use anywhere
+craft --help
+```
+
+### Option 3: Install from GitHub (Latest)
+```bash
+# For the bleeding edge
+uv add git+https://github.com/bwl/craft.git
+
+# Or with pip
+pip install git+https://github.com/bwl/craft.git
+```
+
+### Quick Test
+```bash
+# Verify installation
+craft --version
+
+# See what's available
+craft --domains
+
+# Try the human-friendly interface
+craft --help --noob
+```
 
 ### What Actually Happens
 
@@ -310,7 +352,7 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 4. Submit pull request with documentation
 
 ### Reporting Issues
-- [GitHub Issues](https://github.com/slate-tui/craft-cli/issues) for bugs and feature requests
+- [GitHub Issues](https://github.com/bwl/craft/issues) for bugs and feature requests
 - Include domain, tool, and command that caused the issue
 - Provide expected vs actual behavior
 
@@ -322,8 +364,8 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 - **Documentation**: https://craft-cli.readthedocs.io
 - **PyPI Package**: https://pypi.org/project/craft-cli/
-- **Source Code**: https://github.com/slate-tui/craft-cli
-- **Issue Tracker**: https://github.com/slate-tui/craft-cli/issues
+- **Source Code**: https://github.com/bwl/craft
+- **Issue Tracker**: https://github.com/bwl/craft/issues
 
 ---
 

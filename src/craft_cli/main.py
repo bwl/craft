@@ -61,7 +61,7 @@ def main() -> int:
         
         # Run the tool
         args = sys.argv[3:] if len(sys.argv) > 3 else []
-        return cli.run_tool(domain, tool, args)
+        return cli.run_tool(domain, tool, args, human_mode)
     
     cli.show_help(human_mode)
     return 0

@@ -209,7 +209,7 @@ class CraftCLI:
         
         return True
     
-    def run_tool(self, domain: str, tool: str, args: List[str]) -> int:
+    def run_tool(self, domain: str, tool: str, args: List[str], human_mode: bool = False) -> int:
         """Execute a domain tool"""
         domain_dir = self.domains_dir / domain
         tool_file = domain_dir / "tools" / f"{tool}.yaml"
@@ -244,19 +244,91 @@ class CraftCLI:
             base_path=base_path,
             args=args_str,
             domain=domain,
-            tool=tool
+            tool=tool,
+            tool_config=tool_config
         )
+
+        # Display execution context
+        return self._display_execution_context(
+            domain, tool, args, domain_config, tool_config, command, base_path, human_mode
+        )
+    
+    def _display_execution_context(self, domain: str, tool: str, args: List[str], 
+                                 domain_config: dict, tool_config: dict, 
+                                 command: str, base_path: str, human_mode: bool = False) -> int:
+        """Display execution context in appropriate format"""
         
-        # Show what we're running (only in verbose mode)
-        if "--verbose" in args:
-            print(f"Running: {command}")
+        # Prepare context data
+        context = {
+            "execution": {
+                "domain": domain,
+                "tool": tool,
+                "args": args,
+                "command": command,
+                "base_path": base_path
+            },
+            "domain_config": domain_config,
+            "tool_config": tool_config,
+            "resolved_command": command,
+            "variables": {
+                "base_path": base_path,
+                "args": " ".join(args),
+                "domain": domain,
+                "tool": tool
+            }
+        }
         
-        try:
-            result = subprocess.run(command, shell=True, check=False)
-            return result.returncode
-        except KeyboardInterrupt:
-            print("\nInterrupted")
-            return 1
-        except Exception as e:
-            print(f"ERROR: {e}")
-            return 1
+        if human_mode:
+            # Rich table display for humans
+            from rich.table import Table
+            from rich.panel import Panel
+            from rich.console import Console
+            from rich.text import Text
+            from rich.syntax import Syntax
+            
+            console = Console()
+            
+            # Main execution panel
+            exec_panel = Panel(
+                Text.from_markup(
+                    f"[bold]Domain:[/bold] {domain}\n"
+                    f"[bold]Tool:[/bold] {tool}\n"
+                    f"[bold]Arguments:[/bold] {' '.join(args) if args else 'None'}\n"
+                    f"[bold]Base Path:[/bold] {base_path}\n"
+                    f"[bold]Resolved Command:[/bold] {command}"
+                ),
+                title="🔧 Execution Context",
+                border_style="cyan"
+            )
+            console.print(exec_panel)
+            
+            # Tool configuration
+            if tool_config:
+                config_text = f"Name: {tool_config.get('name', 'Unknown')}\n"
+                config_text += f"Description: {tool_config.get('description', 'No description')}\n"
+                config_text += f"Category: {tool_config.get('category', 'uncategorized')}\n"
+                config_text += f"Command Template: {tool_config.get('command', 'None')}"
+                
+                config_panel = Panel(
+                    Text(config_text),
+                    title="📋 Tool Configuration",
+                    border_style="green"
+                )
+                console.print(config_panel)
+            
+            # Full help text if available
+            help_text = tool_config.get('help', '')
+            if help_text:
+                help_panel = Panel(
+                    Text(help_text),
+                    title="📖 Tool Help",
+                    border_style="yellow"
+                )
+                console.print(help_panel)
+        else:
+            # JSON format for AI agents
+            import json
+            print("EXECUTION_CONTEXT:")
+            print(json.dumps(context, indent=2, default=str))
+        
+        return 0  # Success - context displayed
