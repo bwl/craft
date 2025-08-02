@@ -13,7 +13,7 @@ UV provides the best experience for CLI tools:
 
 ```bash
 # Install as a UV tool (isolated environment)
-uv tool install craft-cli
+uv tool install craft
 
 # Verify installation
 craft --version
@@ -21,8 +21,8 @@ craft --version
 
 Benefits:
 - Isolated environment prevents dependency conflicts
-- Easy to update: `uv tool upgrade craft-cli`
-- Easy to remove: `uv tool uninstall craft-cli`
+- Easy to update: `uv tool upgrade craft`
+- Easy to remove: `uv tool uninstall craft`
 
 ### Method 2: pipx (Alternative)
 
@@ -30,7 +30,7 @@ If you prefer pipx for Python CLI tools:
 
 ```bash
 # Install with pipx
-pipx install craft-cli
+pipx install craft
 
 # Verify installation
 craft --version
@@ -42,7 +42,7 @@ Standard pip installation:
 
 ```bash
 # Install system-wide (not recommended for CLI tools)
-pip install craft-cli
+pip install craft
 
 # Verify installation  
 craft --version
