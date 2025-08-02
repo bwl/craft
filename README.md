@@ -1,6 +1,6 @@
 # 🚀 Craft CLI Framework
 
-*Trick Gemini into being actually useful*
+*A cli to help claude, gemini, etc rum specific tasks consistently and helpfully *
 
 ## Table of Contents
 - [What Actually Happens](#what-actually-happens)
