@@ -1,6 +1,5 @@
 # 🚀 Craft CLI Framework
-
-*A cli to help claude, gemini, etc rum specific tasks consistently and helpfully *
+## a cli to help claude, gemini, etc run specific tasks consistently and helpfully
 
 ## Table of Contents
 - [What Actually Happens](#what-actually-happens)
