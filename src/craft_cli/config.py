@@ -15,6 +15,7 @@ class CraftConfig:
     include_builtin_domains: bool = True
     default_human_mode: bool = False
     verbose_execution: bool = False
+    show_startup_checklist: bool = True
     
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'CraftConfig':
@@ -24,7 +25,8 @@ class CraftConfig:
             domain_paths=data.get('domain_paths', []),
             include_builtin_domains=data.get('include_builtin_domains', True),
             default_human_mode=config_data.get('default_human_mode', False),
-            verbose_execution=config_data.get('verbose_execution', False)
+            verbose_execution=config_data.get('verbose_execution', False),
+            show_startup_checklist=config_data.get('show_startup_checklist', True)
         )
     
     def merge_with(self, other: 'CraftConfig') -> 'CraftConfig':
@@ -33,7 +35,8 @@ class CraftConfig:
             domain_paths=self.domain_paths + other.domain_paths,
             include_builtin_domains=other.include_builtin_domains,
             default_human_mode=other.default_human_mode,
-            verbose_execution=other.verbose_execution
+            verbose_execution=other.verbose_execution,
+            show_startup_checklist=other.show_startup_checklist
         )
 
 
@@ -141,7 +144,8 @@ class ConfigManager:
                 'include_builtin_domains': True,
                 'config': {
                     'default_human_mode': False,
-                    'verbose_execution': False
+                    'verbose_execution': False,
+                    'show_startup_checklist': True
                 }
             }
             

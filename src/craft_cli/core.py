@@ -27,10 +27,10 @@ class CraftCLI:
         """
         self.config_manager = ConfigManager()
         
-        # Check for first-time setup (skip in test environments)
-        if (self.config_manager.should_offer_example_config() and 
-            not self._is_test_environment()):
-            self._offer_example_config()
+        # Show startup checklist if enabled (skip in test environments)
+        config = self.config_manager.get_config()
+        if config.show_startup_checklist and not self._is_test_environment():
+            self._show_startup_checklist()
         
         # Check for domain conflicts and warn user
         conflicts = self.config_manager.check_for_conflicts()
@@ -46,22 +46,73 @@ class CraftCLI:
             'TESTING' in os.environ
         )
     
-    def _offer_example_config(self) -> None:
-        """Offer to create example config for first-time users"""
-        print("🚀 Welcome to Craft CLI!")
-        print("No configuration found. Would you like to create an example config?")
-        print("This will create ~/.config/craft/craftrc with sensible defaults.")
+    def _show_startup_checklist(self) -> None:
+        """Show startup configuration checklist"""
+        config = self.config_manager.get_config()
         
-        try:
-            response = input("Create example config? (y/N): ").strip().lower()
-            if response in ['y', 'yes']:
-                if self.config_manager.create_example_user_config():
-                    print(f"✅ Example config created at {self.config_manager.user_config_path}")
-                    print("You can edit this file to add your own domain paths.")
-                else:
-                    print("❌ Failed to create example config")
-        except (KeyboardInterrupt, EOFError):
-            print("\nSkipping config creation.")
+        # Check configuration status
+        user_config_exists = self.config_manager.user_config_path.exists()
+        project_config_exists = self.config_manager.project_config_path.exists()
+        has_custom_domains = len(config.domain_paths) > 0
+        
+        # Human-friendly output (emojis)
+        if not self._is_test_environment():
+            print("🚀 Craft CLI Status:")
+            
+            # Built-in domains
+            if config.include_builtin_domains:
+                print("✅ Built-in domains enabled (linting, coding, slate)")
+            else:
+                print("❌ Built-in domains disabled")
+            
+            # User config
+            if user_config_exists:
+                print("✅ User config found (~/.config/craft/craftrc)")
+            else:
+                print("❌ No user config found")
+                print("   → Run with 'y' when prompted to create example config")
+            
+            # Project config
+            if project_config_exists:
+                print("✅ Project config found (./.craftrc)")
+            else:
+                print("❌ No project config found")
+            
+            # Custom domains
+            if has_custom_domains:
+                print(f"✅ Custom domain paths configured ({len(config.domain_paths)})")
+            else:
+                print("❌ No custom domain paths configured")
+            
+            print()
+            
+            # Offer to create config if none exists
+            if not user_config_exists and not project_config_exists:
+                try:
+                    response = input("Create example user config? (y/N): ").strip().lower()
+                    if response in ['y', 'yes']:
+                        if self.config_manager.create_example_user_config():
+                            print(f"✅ Example config created at {self.config_manager.user_config_path}")
+                        else:
+                            print("❌ Failed to create example config")
+                        print()
+                except (KeyboardInterrupt, EOFError):
+                    print("Skipped.\n")
+        else:
+            # AI-optimized output (plain text)
+            print("CRAFT CLI STATUS:")
+            
+            # Built-in domains
+            if config.include_builtin_domains:
+                print("BUILTIN_DOMAINS: enabled")
+            else:
+                print("BUILTIN_DOMAINS: disabled")
+            
+            # Configs
+            print(f"USER_CONFIG: {'found' if user_config_exists else 'not_found'}")
+            print(f"PROJECT_CONFIG: {'found' if project_config_exists else 'not_found'}")
+            print(f"CUSTOM_DOMAINS: {len(config.domain_paths)}")
+            print()
     
     def _show_conflict_warnings(self, conflicts) -> None:
         """Show warnings about domain name conflicts"""
