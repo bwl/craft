@@ -1,5 +1,7 @@
 # 🚀 Craft CLI Framework
 
+*Trick Gemini into being actually useful*
+
 > ⚠️ **Friendly Disclaimer**: Most of the features promised below exist but some um... we will get back to you soon, dw 😅
 
 ## Fire Up Specialized Agents for Any Task
