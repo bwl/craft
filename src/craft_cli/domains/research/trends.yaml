@@ -1,0 +1,11 @@
+name: TREND-TRACKER
+description: Track research trends and emerging topics
+command: trend-track {args}
+category: trends
+help: "Usage: craft research trends [topic] [options]\n            \nTrack research\
+  \ trends and identify emerging topics.\n\nOptions:\n  --timeframe=1y,5y,10y    \
+  \     Analysis timeframe\n  --fields=cs,bio,physics       Research fields\n  --visualization=chart,network\
+  \ Output type\n  --export=png,svg,html         Export format\n  \nExamples:\n  craft\
+  \ research trends \"artificial intelligence\" --timeframe=5y --visualization=chart\n\
+  \  craft research trends --fields=bio --visualization=network --export=html"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN RESEARCH

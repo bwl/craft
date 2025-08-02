@@ -1,0 +1,11 @@
+name: PLOT-WEAVER
+description: Create intricate plot structures and twists
+command: plot-gen {args}
+category: plotting
+help: "Usage: craft creative plot [genre] [options]\n            \nGenerate complex\
+  \ plot structures with compelling twists.\n\nOptions:\n  --genre=thriller,romance,scifi\
+  \      Plot genre\n  --acts=3,5,7                        Number of acts\n  --twists=1,2,3\
+  \                      Number of plot twists\n  --stakes=personal,global,cosmic\
+  \     Story stakes\n  \nExamples:\n  craft creative plot thriller --acts=3 --twists=2\
+  \ --stakes=global\n  craft creative plot --genre=romance --acts=5 --stakes=personal"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN WRITE

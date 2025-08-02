@@ -1,0 +1,11 @@
+name: DATA-BACKUP
+description: Backup databases and file systems
+command: backup-manager {args}
+category: backup
+help: "Usage: craft devops backup [source] [options]\n            \nBackup databases\
+  \ and file systems reliably.\n\nOptions:\n  --type=database,files,full    Backup\
+  \ type\n  --destination=s3,local,gcs    Backup destination\n  --schedule=daily,weekly\
+  \       Backup schedule\n  --encrypt                     Encrypt backups\n  \nExamples:\n\
+  \  craft devops backup database --destination=s3 --encrypt\n  craft devops backup\
+  \ /app/data --schedule=daily --type=files"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN CODE

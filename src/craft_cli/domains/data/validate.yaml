@@ -1,0 +1,11 @@
+name: DATA-VALIDATOR
+description: Validate data quality and schema compliance
+command: python -m data_validator {args}
+category: validation
+help: "Usage: craft data validate [file] [schema] [options]\n            \nValidate\
+  \ data against schemas and quality rules.\n\nOptions:\n  --schema=file.json    Schema\
+  \ file to validate against\n  --rules=file.yaml     Custom validation rules\n  --strict\
+  \              Fail on any validation errors\n  \nExamples:\n  craft data validate\
+  \ data.csv schema.json --strict\n  craft data validate --rules=quality_rules.yaml\
+  \ dataset.json"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN ANALYZE

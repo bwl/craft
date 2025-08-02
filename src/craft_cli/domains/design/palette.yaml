@@ -1,0 +1,10 @@
+name: COLOR-PALETTE
+description: Generate harmonious color palettes
+command: color-gen {args}
+category: colors
+help: "Usage: craft design palette [base-color] [options]\n            \nGenerate\
+  \ beautiful color palettes for your designs.\n\nOptions:\n  --scheme=monochrome,triadic,complementary\
+  \ Harmony type\n  --count=5             Number of colors\n  --format=hex,rgb,hsl\
+  \  Output format\n  \nExamples:\n  craft design palette #3498db --scheme=triadic\
+  \ --count=5\n  craft design palette --scheme=monochrome --format=rgb"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN PAINT

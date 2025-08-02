@@ -1,0 +1,11 @@
+name: NAME-CREATOR
+description: Generate names for characters, places, and brands
+command: name-gen {args}
+category: naming
+help: "Usage: craft creative name [type] [options]\n            \nGenerate creative\
+  \ names for various purposes.\n\nOptions:\n  --type=character,place,brand,product\
+  \ Name type\n  --style=fantasy,modern,classic       Naming style\n  --gender=male,female,neutral\
+  \         For character names\n  --count=10                           Number of\
+  \ suggestions\n  \nExamples:\n  craft creative name --type=character --style=fantasy\
+  \ --gender=female\n  craft creative name brand --style=modern --count=20"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN WRITE

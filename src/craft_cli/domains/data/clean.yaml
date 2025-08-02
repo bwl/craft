@@ -1,0 +1,10 @@
+name: DATA-CLEANER
+description: Clean and preprocess raw data
+command: python -m data_cleaner {args}
+category: preprocessing
+help: "Usage: craft data clean [file] [options]\n            \nClean and preprocess\
+  \ messy datasets.\n\nOptions:\n  --remove-nulls       Remove null values\n  --normalize\
+  \          Normalize numeric columns\n  --dedupe             Remove duplicate rows\n\
+  \  \nExamples:\n  craft data clean messy_data.csv --remove-nulls\n  craft data clean\
+  \ --normalize --dedupe dataset.json"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN ANALYZE

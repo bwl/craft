@@ -1,0 +1,11 @@
+name: CITATION-MAKER
+description: Generate proper citations and bibliographies
+command: citation-gen {args}
+category: citations
+help: "Usage: craft research cite [source] [options]\n            \nGenerate properly\
+  \ formatted citations and bibliographies.\n\nOptions:\n  --style=apa,mla,chicago,ieee\
+  \  Citation style\n  --type=book,article,website   Source type\n  --export=txt,docx,latex\
+  \       Export format\n  --bibliography                Generate full bibliography\n\
+  \  \nExamples:\n  craft research cite https://example.com/article --style=apa\n\
+  \  craft research cite book.pdf --type=book --style=mla --export=latex"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN RESEARCH

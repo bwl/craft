@@ -57,7 +57,9 @@ class CraftCLI:
             
             # Built-in domains
             if config.include_builtin_domains:
-                print("✅ Built-in domains enabled (linting, coding, slate)")
+                builtin_domains = self._get_builtin_domain_names()
+                domains_list = ", ".join(sorted(builtin_domains))
+                print(f"✅ Built-in domains enabled ({domains_list})")
             else:
                 print("❌ Built-in domains disabled")
             
@@ -100,7 +102,9 @@ class CraftCLI:
             
             # Built-in domains
             if config.include_builtin_domains:
-                print("BUILTIN_DOMAINS: enabled")
+                builtin_domains = self._get_builtin_domain_names()
+                domains_list = ",".join(sorted(builtin_domains))
+                print(f"BUILTIN_DOMAINS: enabled ({domains_list})")
             else:
                 print("BUILTIN_DOMAINS: disabled")
             
@@ -132,6 +136,18 @@ class CraftCLI:
             if domain_dir.is_dir():
                 return domain_dir
         return None
+    
+    def _get_builtin_domain_names(self) -> List[str]:
+        """Get list of built-in domain names"""
+        builtin_path = Path(__file__).parent / "domains"
+        if not builtin_path.exists():
+            return []
+        
+        domains = []
+        for domain_dir in builtin_path.iterdir():
+            if domain_dir.is_dir():
+                domains.append(domain_dir.name)
+        return domains
     
     def show_help(self, human_mode: bool = False) -> None:
         """Display main help information"""
@@ -291,10 +307,15 @@ class CraftCLI:
         name = config.get("name", tool)
         desc = config.get("description", "No description")
         help_text = config.get("help", "No help available")
+        next_step = config.get("next_step", "")
         
         if human_mode:
+            content = f"[bold]{name}[/bold]\n{desc}\n\n{help_text}"
+            if next_step:
+                content += f"\n\n[bold green]Next Step:[/bold green] {next_step}"
+            
             panel = Panel(
-                Text.from_markup(f"[bold]{name}[/bold]\n{desc}\n\n{help_text}"),
+                Text.from_markup(content),
                 title=f"🔧 {tool}",
                 border_style="green"
             )
@@ -305,6 +326,9 @@ class CraftCLI:
             print(f"Description: {desc}")
             print("")
             print(help_text)
+            if next_step:
+                print("")
+                print(f"Next Step: {next_step}")
             print("")
             print("Add --noob flag for Rich UI panel")
         
@@ -364,7 +388,14 @@ class CraftCLI:
                 "command": command,
                 "base_path": base_path
             },
-            "tool_config": tool_config,
+            "tool_config": {
+                "name": tool_config.get("name", ""),
+                "description": tool_config.get("description", ""),
+                "command": tool_config.get("command", ""),
+                "category": tool_config.get("category", ""),
+                "help": tool_config.get("help", ""),
+                "next_step": tool_config.get("next_step", "")
+            },
             "resolved_command": command,
             "variables": {
                 "base_path": base_path,

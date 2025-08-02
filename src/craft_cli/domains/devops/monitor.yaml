@@ -1,0 +1,11 @@
+name: HEALTH-MONITOR
+description: Monitor application health and performance
+command: health-check {args}
+category: monitoring
+help: "Usage: craft devops monitor [service] [options]\n            \nMonitor application\
+  \ health and performance metrics.\n\nOptions:\n  --interval=30s,1m,5m  Check interval\n\
+  \  --alerts=email,slack  Alert channels\n  --metrics=cpu,memory,disk Metrics to\
+  \ track\n  --dashboard           Open web dashboard\n  \nExamples:\n  craft devops\
+  \ monitor api-service --interval=1m --alerts=slack\n  craft devops monitor --metrics=cpu,memory\
+  \ --dashboard"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN CODE

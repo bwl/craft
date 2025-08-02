@@ -1,0 +1,11 @@
+name: AUTO-DEPLOYER
+description: Deploy applications to various platforms
+command: deploy-bot {args}
+category: deployment
+help: "Usage: craft devops deploy [platform] [options]\n            \nDeploy your\
+  \ applications automatically.\n\nOptions:\n  --platform=aws,gcp,azure,vercel Target\
+  \ platform\n  --env=dev,staging,prod          Environment\n  --config=file.yaml\
+  \              Deployment config\n  --dry-run                       Preview without\
+  \ deploying\n  \nExamples:\n  craft devops deploy --platform=vercel --env=prod\n\
+  \  craft devops deploy aws --config=deploy.yaml --dry-run"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN CODE

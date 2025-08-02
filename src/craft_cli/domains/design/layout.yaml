@@ -1,0 +1,11 @@
+name: LAYOUT-GRID
+description: Generate responsive grid layouts
+command: grid-system {args}
+category: layout
+help: "Usage: craft design layout [type] [options]\n            \nCreate responsive\
+  \ grid systems and layouts.\n\nOptions:\n  --columns=12,16,24    Number of columns\n\
+  \  --breakpoints=sm,md,lg,xl Responsive breakpoints  \n  --gutter=16,24,32     Gutter\
+  \ size in pixels\n  --export=css,scss,html Export format\n  \nExamples:\n  craft\
+  \ design layout --columns=12 --export=css\n  craft design layout dashboard --breakpoints=sm,md,lg\
+  \ --gutter=24"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN PAINT

@@ -1,0 +1,11 @@
+name: DATA-EXTRACTOR
+description: Extract structured data from documents
+command: data-extract {args}
+category: extraction
+help: "Usage: craft research extract [file] [options]\n            \nExtract structured\
+  \ data from PDFs, articles, and documents.\n\nOptions:\n  --type=tables,figures,text\
+  \    Data type to extract\n  --format=csv,json,xlsx        Output format\n  --ocr\
+  \                         Use OCR for scanned docs\n  --clean                  \
+  \     Clean extracted data\n  \nExamples:\n  craft research extract paper.pdf --type=tables\
+  \ --format=csv\n  craft research extract scan.pdf --ocr --type=text --clean"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN RESEARCH

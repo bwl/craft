@@ -1,0 +1,11 @@
+name: STORY-BUILDER
+description: Build compelling narratives and stories
+command: story-craft {args}
+category: storytelling
+help: "Usage: craft creative story [genre] [options]\n            \nCraft compelling\
+  \ narratives and story structures.\n\nOptions:\n  --genre=scifi,fantasy,mystery\
+  \   Story genre\n  --structure=hero,three-act      Story structure\n  --length=short,novella,novel\
+  \    Story length\n  --elements=characters,plot,setting Focus areas\n  \nExamples:\n\
+  \  craft creative story --genre=scifi --structure=hero --length=short\n  craft creative\
+  \ story mystery --elements=characters,plot"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN WRITE

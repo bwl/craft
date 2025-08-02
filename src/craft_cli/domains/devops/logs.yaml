@@ -1,0 +1,11 @@
+name: LOG-ANALYZER
+description: Analyze and search application logs
+command: log-search {args}
+category: logging
+help: "Usage: craft devops logs [service] [options]\n            \nSearch and analyze\
+  \ application logs efficiently.\n\nOptions:\n  --level=error,warn,info,debug Log\
+  \ level filter\n  --since=1h,24h,7d             Time range\n  --grep=pattern   \
+  \             Search pattern\n  --export=json,csv             Export format\n  \n\
+  Examples:\n  craft devops logs api-service --level=error --since=24h\n  craft devops\
+  \ logs --grep=\"database connection\" --export=json"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN CODE

@@ -1,0 +1,11 @@
+name: AUTO-SCALER
+description: Auto-scale applications based on load
+command: auto-scale {args}
+category: scaling
+help: "Usage: craft devops scale [service] [options]\n            \nAutomatically\
+  \ scale applications based on metrics.\n\nOptions:\n  --min=1               Minimum\
+  \ instances\n  --max=10              Maximum instances\n  --metric=cpu,memory,requests\
+  \ Scale trigger\n  --threshold=80        Scale threshold percentage\n  \nExamples:\n\
+  \  craft devops scale web-service --min=2 --max=20 --metric=cpu --threshold=70\n\
+  \  craft devops scale api --metric=requests --threshold=1000"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN CODE

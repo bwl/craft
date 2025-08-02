@@ -1,0 +1,10 @@
+name: DATA-TRANSFORMER
+description: Transform data between different formats
+command: python -m data_transformer {args}
+category: transformation
+help: "Usage: craft data transform [input] [output] [options]\n            \nTransform\
+  \ data between CSV, JSON, Parquet, and other formats.\n\nOptions:\n  --from=csv,json,xml\
+  \   Input format\n  --to=csv,json,parquet Output format\n  --chunk-size=1000   \
+  \  Process in chunks\n  \nExamples:\n  craft data transform data.csv data.json --from=csv\
+  \ --to=json\n  craft data transform big_file.csv --to=parquet --chunk-size=5000"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN ANALYZE

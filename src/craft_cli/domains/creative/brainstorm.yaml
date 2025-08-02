@@ -1,0 +1,11 @@
+name: IDEA-GENERATOR
+description: Generate creative ideas and concepts
+command: idea-spark {args}
+category: ideation
+help: "Usage: craft creative brainstorm [topic] [options]\n            \nGenerate\
+  \ creative ideas and innovative concepts.\n\nOptions:\n  --method=scamper,mindmap,random\
+  \ Brainstorming method\n  --count=10,20,50                Number of ideas\n  --style=business,artistic,tech\
+  \  Idea style\n  --export=txt,mindmap,json       Export format\n  \nExamples:\n\
+  \  craft creative brainstorm \"mobile app\" --method=scamper --count=20\n  craft\
+  \ creative brainstorm --style=artistic --export=mindmap"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN WRITE

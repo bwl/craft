@@ -1,0 +1,11 @@
+name: DATA-VISUALIZER
+description: Create charts and visualizations from data
+command: python -m data_viz {args}
+category: visualization
+help: "Usage: craft data visualize [file] [options]\n            \nGenerate beautiful\
+  \ charts and visualizations.\n\nOptions:\n  --chart=bar,line,scatter Chart type\n\
+  \  --x-col=column          X-axis column\n  --y-col=column          Y-axis column\n\
+  \  --save=png,svg,html     Save format\n  \nExamples:\n  craft data visualize sales.csv\
+  \ --chart=line --x-col=date --y-col=revenue\n  craft data visualize --chart=scatter\
+  \ --save=html data.json"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN ANALYZE

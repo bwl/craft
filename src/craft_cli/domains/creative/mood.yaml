@@ -1,0 +1,11 @@
+name: MOOD-BOARD
+description: Create mood boards and aesthetic inspiration
+command: mood-create {args}
+category: inspiration
+help: "Usage: craft creative mood [theme] [options]\n            \nCreate inspiring\
+  \ mood boards and aesthetic collections.\n\nOptions:\n  --theme=minimalist,vintage,cyberpunk\
+  \ Aesthetic theme\n  --colors=warm,cool,monochrome        Color palette\n  --elements=photos,textures,typography\
+  \ Board elements\n  --export=png,pdf,web                 Export format\n  \nExamples:\n\
+  \  craft creative mood --theme=cyberpunk --colors=cool --export=png\n  craft creative\
+  \ mood vintage --elements=photos,textures --export=web"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN WRITE

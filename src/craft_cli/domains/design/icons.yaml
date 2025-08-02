@@ -1,0 +1,11 @@
+name: ICON-GENERATOR
+description: Create custom icons and pictograms
+command: icon-forge {args}
+category: graphics
+help: "Usage: craft design icons [style] [options]\n            \nGenerate custom\
+  \ icons for your projects.\n\nOptions:\n  --style=outline,filled,duotone Icon style\n\
+  \  --size=16,24,32,48,64         Icon size\n  --format=svg,png,ico          Output\
+  \ format\n  --theme=light,dark            Color theme\n  \nExamples:\n  craft design\
+  \ icons --style=outline --size=24 --format=svg\n  craft design icons home,user,settings\
+  \ --theme=dark"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN PAINT

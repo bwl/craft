@@ -1,0 +1,11 @@
+name: SMART-SEARCHER
+description: Search across multiple academic and web sources
+command: research-search {args}
+category: discovery
+help: "Usage: craft research search [query] [options]\n            \nSearch across\
+  \ academic papers, articles, and web sources.\n\nOptions:\n  --sources=arxiv,pubmed,google\
+  \ Scholar sources\n  --format=papers,articles,news Content type\n  --since=2020,2023\
+  \             Year filter\n  --export=bib,ris,json         Export format\n  \nExamples:\n\
+  \  craft research search \"machine learning ethics\" --sources=arxiv --since=2023\n\
+  \  craft research search \"climate change\" --format=papers --export=bib"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN RESEARCH

@@ -1,0 +1,11 @@
+name: DOC-SUMMARIZER
+description: Summarize documents and research papers
+command: doc-summary {args}
+category: analysis
+help: "Usage: craft research summarize [file] [options]\n            \nGenerate concise\
+  \ summaries of documents and papers.\n\nOptions:\n  --length=short,medium,long \
+  \   Summary length\n  --style=bullet,paragraph      Summary style\n  --key-points=5\
+  \                Number of key points\n  --citations                   Include citations\n\
+  \  \nExamples:\n  craft research summarize paper.pdf --length=short --style=bullet\n\
+  \  craft research summarize article.txt --key-points=3 --citations"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN RESEARCH

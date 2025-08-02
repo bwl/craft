@@ -1,0 +1,10 @@
+name: MOCKUP-MAKER
+description: Generate UI/UX mockups and wireframes
+command: figma-cli create mockup {args}
+category: prototyping
+help: "Usage: craft design mockup [template] [options]\n            \nCreate beautiful\
+  \ UI mockups and wireframes.\n\nOptions:\n  --template=web,mobile,desktop Template\
+  \ type\n  --style=minimal,modern,retro  Design style\n  --export=png,svg,pdf   \
+  \       Export format\n  \nExamples:\n  craft design mockup --template=mobile --style=modern\n\
+  \  craft design mockup dashboard --export=png"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN PAINT

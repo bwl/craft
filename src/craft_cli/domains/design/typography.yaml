@@ -1,0 +1,10 @@
+name: FONT-PAIRER
+description: Find perfect font combinations
+command: font-pair {args}
+category: typography
+help: "Usage: craft design typography [primary-font] [options]\n            \nDiscover\
+  \ perfect font pairings for your designs.\n\nOptions:\n  --style=serif,sans,mono,display\
+  \ Font style\n  --mood=elegant,playful,serious Design mood\n  --use=web,print,mobile\
+  \        Intended use\n  \nExamples:\n  craft design typography \"Roboto\" --style=serif\
+  \ --mood=elegant\n  craft design typography --style=sans --use=web"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN PAINT

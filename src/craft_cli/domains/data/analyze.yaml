@@ -1,0 +1,10 @@
+name: DATA-ANALYZER
+description: Analyze datasets and generate insights
+command: python -m pandas_profiling {args}
+category: analysis
+help: "Usage: craft data analyze [file] [options]\n            \nAnalyze datasets\
+  \ and generate comprehensive reports.\n\nOptions:\n  --format=html,json    Output\
+  \ format\n  --profile            Generate data profiling report\n  --correlations\
+  \       Show correlation matrix\n  \nExamples:\n  craft data analyze data.csv --format=html\n\
+  \  craft data analyze --profile dataset.json"
+next_step: TAKE THE NEXT STEP ON THIS OR FIND ONE OF YOUR AGENTS WHO CAN ANALYZE
