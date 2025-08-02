@@ -11,6 +11,8 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
 
+from .config import ConfigManager
+
 console = Console()
 
 
@@ -21,16 +23,68 @@ class CraftCLI:
         """Initialize Craft CLI
         
         Args:
-            base_path: Base path for finding domains directory
+            base_path: Base path for finding domains directory (legacy, ignored with config system)
         """
-        if base_path is None:
-            # Try to find domains directory relative to package location
-            package_dir = Path(__file__).parent
-            self.base_path = package_dir.parent.parent  # Go up to project root
-        else:
-            self.base_path = Path(base_path)
+        self.config_manager = ConfigManager()
         
-        self.domains_dir = self.base_path / "domains"
+        # Check for first-time setup (skip in test environments)
+        if (self.config_manager.should_offer_example_config() and 
+            not self._is_test_environment()):
+            self._offer_example_config()
+        
+        # Check for domain conflicts and warn user
+        conflicts = self.config_manager.check_for_conflicts()
+        if conflicts:
+            self._show_conflict_warnings(conflicts)
+    
+    def _is_test_environment(self) -> bool:
+        """Check if running in a test environment"""
+        import os
+        return (
+            'pytest' in sys.modules or
+            'PYTEST_CURRENT_TEST' in os.environ or
+            'TESTING' in os.environ
+        )
+    
+    def _offer_example_config(self) -> None:
+        """Offer to create example config for first-time users"""
+        print("🚀 Welcome to Craft CLI!")
+        print("No configuration found. Would you like to create an example config?")
+        print("This will create ~/.config/craft/craftrc with sensible defaults.")
+        
+        try:
+            response = input("Create example config? (y/N): ").strip().lower()
+            if response in ['y', 'yes']:
+                if self.config_manager.create_example_user_config():
+                    print(f"✅ Example config created at {self.config_manager.user_config_path}")
+                    print("You can edit this file to add your own domain paths.")
+                else:
+                    print("❌ Failed to create example config")
+        except (KeyboardInterrupt, EOFError):
+            print("\nSkipping config creation.")
+    
+    def _show_conflict_warnings(self, conflicts) -> None:
+        """Show warnings about domain name conflicts"""
+        print("⚠️  Domain name conflicts detected:")
+        for domain_name, sources in conflicts:
+            print(f"  Domain '{domain_name}' found in multiple locations:")
+            for i, source in enumerate(sources):
+                precedence = "✓ ACTIVE" if i == 0 else "  (shadowed)"
+                print(f"    {precedence}: {source}")
+        print("Project-level domains take precedence over user-level and built-in domains.")
+        print()
+    
+    def _get_domain_paths(self) -> List[Path]:
+        """Get all domain paths from config manager"""
+        return self.config_manager.get_domain_paths()
+    
+    def _find_domain_by_name(self, domain_name: str) -> Optional[Path]:
+        """Find the active domain directory by name (respects precedence)"""
+        for domain_path in self._get_domain_paths():
+            domain_dir = domain_path / domain_name
+            if domain_dir.is_dir():
+                return domain_dir
+        return None
     
     def show_help(self, human_mode: bool = False) -> None:
         """Display main help information"""
@@ -76,20 +130,30 @@ class CraftCLI:
     
     def list_domains(self, human_mode: bool = False) -> None:
         """List available domains"""
-        if not self.domains_dir.exists():
-            print("ERROR: No domains directory found")
+        domain_paths = self._get_domain_paths()
+        if not domain_paths:
+            print("ERROR: No domain paths configured")
             return
         
+        # Collect unique domains (respects precedence)
+        seen_domains = set()
         domains_data = []
-        for domain_dir in self.domains_dir.iterdir():
-            if domain_dir.is_dir():
-                # Domain name is just the directory name
-                name = domain_dir.name.title()
-                desc = f"Tools for {domain_dir.name}"
+        
+        for domain_path in domain_paths:
+            if not domain_path.exists():
+                continue
                 
-                # Count YAML files directly in domain directory
-                tool_count = len(list(domain_dir.glob("*.yaml")))
-                domains_data.append((domain_dir.name, name, desc, tool_count))
+            for domain_dir in domain_path.iterdir():
+                if domain_dir.is_dir() and domain_dir.name not in seen_domains:
+                    seen_domains.add(domain_dir.name)
+                    
+                    # Domain name is just the directory name
+                    name = domain_dir.name.title()
+                    desc = f"Tools for {domain_dir.name}"
+                    
+                    # Count YAML files directly in domain directory
+                    tool_count = len(list(domain_dir.glob("*.yaml")))
+                    domains_data.append((domain_dir.name, name, desc, tool_count))
         
         if human_mode:
             table = Table(title="Available Domains")
@@ -112,9 +176,9 @@ class CraftCLI:
     
     def list_domain_tools(self, domain: str, human_mode: bool = False) -> bool:
         """List tools in a specific domain. Returns True on success, False on error."""
-        domain_dir = self.domains_dir / domain
+        domain_dir = self._find_domain_by_name(domain)
         
-        if not domain_dir.exists():
+        if not domain_dir:
             print(f"ERROR: Domain '{domain}' not found")
             return False
         
@@ -164,7 +228,13 @@ class CraftCLI:
     
     def show_tool_help(self, domain: str, tool: str, human_mode: bool = False) -> bool:
         """Show help for a specific tool. Returns True on success, False on error."""
-        tool_file = self.domains_dir / domain / f"{tool}.yaml"
+        domain_dir = self._find_domain_by_name(domain)
+        
+        if not domain_dir:
+            print(f"ERROR: Domain '{domain}' not found")
+            return False
+            
+        tool_file = domain_dir / f"{tool}.yaml"
         
         if not tool_file.exists():
             print(f"ERROR: Tool '{tool}' not found in domain '{domain}'")
@@ -195,12 +265,13 @@ class CraftCLI:
     
     def run_tool(self, domain: str, tool: str, args: List[str], human_mode: bool = False) -> int:
         """Execute a domain tool"""
-        domain_dir = self.domains_dir / domain
-        tool_file = domain_dir / f"{tool}.yaml"
+        domain_dir = self._find_domain_by_name(domain)
         
-        if not domain_dir.exists():
+        if not domain_dir:
             print(f"ERROR: Domain '{domain}' not found")
             return 1
+            
+        tool_file = domain_dir / f"{tool}.yaml"
         
         if not tool_file.exists():
             print(f"ERROR: Tool '{tool}' not found in domain '{domain}'")
