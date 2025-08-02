@@ -1,15 +1,16 @@
-# 🔥🔥🔥 CLAUDE USE MY TOOLS!!!!!!!!!! 🔥🔥🔥
+# 🚀 Craft CLI Framework
 
-## ⚡ CRAFT CLI FRAMEWORK ⚡
-## 🚀 DOMAIN-SPECIFIC TOOL ORCHESTRATION MADE SIMPLE 🚀
+## Fire Up Specialized Agents for Any Task
 
 [![PyPI version](https://badge.fury.io/py/craft-cli.svg)](https://badge.fury.io/py/craft-cli)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-# 🎯 HEY CLAUDE! THIS IS FOR YOU! 🎯
+**Transform any specialized workflow into intelligent, agent-ready commands.**
 
-Craft CLI transforms specialized tools into system-tool-like experiences that feel natural and get consistently used. Perfect for AI agent workflows where domain-specific tools need to integrate seamlessly with command-line operations.
+Stop context-switching between tools. Stop explaining your domain knowledge over and over. **Craft CLI lets you deploy domain experts instantly** - whether that's a coding specialist, a linting expert, or a creative writing assistant.
+
+Every `craft` command is really saying: *"Hey, someone smart who understands this domain - handle this for me."*
 
 ## The Problem
 
@@ -66,24 +67,24 @@ craft linting --noob
 
 ## Built-in Domains
 
-### 🎯 Linting - Python Code Quality
+### 🎯 Linting - Deploy a Code Quality Expert
 ```bash
-craft linting ruff check --fix        # Fast Rust-based linter
-craft linting black .                 # Code formatting
-craft linting mypy src/               # Type checking
+craft linting ruff check --fix        # "Fix all the issues you find"
+craft linting black .                 # "Format this code properly"
+craft linting mypy src/               # "Check types thoroughly"
 ```
 
-### 🛠️ Coding - Development Workflow  
+### 🛠️ Coding - Fire Up a Development Specialist  
 ```bash
-craft coding test --coverage          # Run tests with coverage
-craft coding build sync --dev         # UV package management
-craft coding git status               # Git workflow shortcuts
+craft coding test --coverage          # "Run comprehensive tests"
+craft coding build sync --dev         # "Handle my dependencies"
+craft coding git status               # "Show me what's changed"
 ```
 
-### ✍️ SLATE - Novel Writing (Example)
+### ✍️ SLATE - Summon a Creative Writing Assistant
 ```bash
-craft slate namer character --type=protagonist
-craft slate embark "New Series" --genre=fantasy
+craft slate namer character --type=protagonist    # "Generate perfect character names"
+craft slate embark "New Series" --genre=fantasy   # "Set up my novel project"
 ```
 
 ## Key Features
@@ -202,23 +203,23 @@ craft --version                   # Show version
 
 ## Why Craft CLI?
 
-### For AI Agents
-- **Clean, parseable output** by default
-- **Consistent interface** across all domain tools
-- **Natural command patterns** that integrate with existing workflows
-- **Immediate feedback** that can't be ignored or forgotten
+### 🤖 For AI Agents - Deploy Domain Experts Instantly
+- **Clean, parseable output** - No fluff, just actionable results
+- **Domain expertise on-demand** - Every command taps specialized knowledge
+- **Natural integration** - Works with existing agent workflows seamlessly  
+- **Zero context-switching** - The tool understands your domain
 
-### For Humans  
-- **Rich UI option** with beautiful tables and panels
-- **Tool discovery** through natural exploration
-- **Contextual help** exactly when and where needed
-- **Consistent patterns** across different tool domains
+### 👤 For Humans - Access Specialists Without the Overhead
+- **Rich UI option** - Beautiful tables and panels when you need them
+- **Instant expertise** - No need to remember complex tool syntax
+- **Self-documenting** - Help and examples built into every command
+- **Consistent patterns** - Learn once, use everywhere
 
-### For Teams
-- **Standardized tooling** across projects and developers
-- **Easy onboarding** - one pattern to learn, all tools accessible
-- **Extensible architecture** - add new domains without changing framework
-- **Documentation built-in** - help and usage examples embedded in tool definitions
+### 🏢 For Teams - Standardize Your Specialist Tools
+- **Unified interface** - All domain tools follow the same patterns
+- **Easy onboarding** - New team members get productive immediately  
+- **Extensible architecture** - Add new domains without changing the framework
+- **Built-in documentation** - Every tool comes with usage examples
 
 ## Contributing
 
