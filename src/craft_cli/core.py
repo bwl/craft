@@ -83,18 +83,12 @@ class CraftCLI:
         domains_data = []
         for domain_dir in self.domains_dir.iterdir():
             if domain_dir.is_dir():
-                config_file = domain_dir / "config.yaml"
-                tools_dir = domain_dir / "tools"
+                # Domain name is just the directory name
+                name = domain_dir.name.title()
+                desc = f"Tools for {domain_dir.name}"
                 
-                if config_file.exists():
-                    config = yaml.safe_load(config_file.read_text())
-                    name = config.get("name", domain_dir.name)
-                    desc = config.get("description", "No description")
-                else:
-                    name = domain_dir.name
-                    desc = "No config found"
-                
-                tool_count = len(list(tools_dir.glob("*.yaml"))) if tools_dir.exists() else 0
+                # Count YAML files directly in domain directory
+                tool_count = len(list(domain_dir.glob("*.yaml")))
                 domains_data.append((domain_dir.name, name, desc, tool_count))
         
         if human_mode:
@@ -119,26 +113,16 @@ class CraftCLI:
     def list_domain_tools(self, domain: str, human_mode: bool = False) -> bool:
         """List tools in a specific domain. Returns True on success, False on error."""
         domain_dir = self.domains_dir / domain
-        tools_dir = domain_dir / "tools"
         
         if not domain_dir.exists():
             print(f"ERROR: Domain '{domain}' not found")
             return False
         
-        if not tools_dir.exists():
-            print(f"ERROR: No tools directory found for domain '{domain}'")
-            return False
-        
-        # Load domain config
-        config_file = domain_dir / "config.yaml"
-        if config_file.exists():
-            config = yaml.safe_load(config_file.read_text())
-            domain_name = config.get("name", domain)
-        else:
-            domain_name = domain
+        # Domain name is just the directory name
+        domain_name = domain.title()
         
         tools_data = []
-        for tool_file in tools_dir.glob("*.yaml"):
+        for tool_file in domain_dir.glob("*.yaml"):
             tool_config = yaml.safe_load(tool_file.read_text())
             name = tool_config.get("name", tool_file.stem)
             desc = tool_config.get("description", "No description")
@@ -180,7 +164,7 @@ class CraftCLI:
     
     def show_tool_help(self, domain: str, tool: str, human_mode: bool = False) -> bool:
         """Show help for a specific tool. Returns True on success, False on error."""
-        tool_file = self.domains_dir / domain / "tools" / f"{tool}.yaml"
+        tool_file = self.domains_dir / domain / f"{tool}.yaml"
         
         if not tool_file.exists():
             print(f"ERROR: Tool '{tool}' not found in domain '{domain}'")
@@ -212,7 +196,7 @@ class CraftCLI:
     def run_tool(self, domain: str, tool: str, args: List[str], human_mode: bool = False) -> int:
         """Execute a domain tool"""
         domain_dir = self.domains_dir / domain
-        tool_file = domain_dir / "tools" / f"{tool}.yaml"
+        tool_file = domain_dir / f"{tool}.yaml"
         
         if not domain_dir.exists():
             print(f"ERROR: Domain '{domain}' not found")
@@ -222,12 +206,7 @@ class CraftCLI:
             print(f"ERROR: Tool '{tool}' not found in domain '{domain}'")
             return 1
         
-        # Load configurations
-        domain_config = {}
-        domain_config_file = domain_dir / "config.yaml"
-        if domain_config_file.exists():
-            domain_config = yaml.safe_load(domain_config_file.read_text())
-        
+        # Load tool configuration
         tool_config = yaml.safe_load(tool_file.read_text())
         
         # Build command
@@ -237,7 +216,7 @@ class CraftCLI:
             return 1
         
         # Substitute variables
-        base_path = domain_config.get("base_path", str(Path.cwd()))
+        base_path = str(Path.cwd())  # Always use current working directory
         args_str = " ".join(args)
         
         command = command_template.format(
@@ -250,12 +229,12 @@ class CraftCLI:
 
         # Display execution context
         return self._display_execution_context(
-            domain, tool, args, domain_config, tool_config, command, base_path, human_mode
+            domain, tool, args, tool_config, command, base_path, human_mode
         )
     
     def _display_execution_context(self, domain: str, tool: str, args: List[str], 
-                                 domain_config: dict, tool_config: dict, 
-                                 command: str, base_path: str, human_mode: bool = False) -> int:
+                                 tool_config: dict, command: str, base_path: str, 
+                                 human_mode: bool = False) -> int:
         """Display execution context in appropriate format"""
         
         # Prepare context data
@@ -267,7 +246,6 @@ class CraftCLI:
                 "command": command,
                 "base_path": base_path
             },
-            "domain_config": domain_config,
             "tool_config": tool_config,
             "resolved_command": command,
             "variables": {

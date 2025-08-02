@@ -235,30 +235,23 @@ craft linting --noob
 
 ### 1. Create Domain Structure
 ```bash
-mkdir -p domains/mytools/tools
+mkdir -p domains/mytools
 ```
 
-### 2. Domain Configuration
+### 2. Add Tools
 ```yaml
-# domains/mytools/config.yaml
-name: "My Custom Tools"
-description: "Tools for my specific workflow"
-base_path: "/path/to/my/scripts"
-```
-
-### 3. Add Tools
-```yaml
-# domains/mytools/tools/mytool.yaml
+# domains/mytools/mytool.yaml
 name: "MYTOOL"
 description: "What my tool does"
-command: "python {base_path}/mytool.py {args}"
+command: "python mytool.py {args}"
+category: "utilities"
 help: |
   Usage: craft mytools mytool [options]
   Examples:
     craft mytools mytool --option=value
 ```
 
-### 4. Use Your Domain
+### 3. Use Your Domain
 ```bash
 craft mytools                    # List your tools
 craft mytools mytool --help      # Tool help
@@ -271,21 +264,15 @@ craft mytools mytool --verbose   # Run your tool
 ```
 domains/
 ├── linting/
-│   ├── config.yaml
-│   └── tools/
-│       ├── ruff.yaml
-│       ├── black.yaml
-│       └── mypy.yaml
+│   ├── ruff.yaml
+│   ├── black.yaml
+│   └── mypy.yaml
 ├── coding/
-│   ├── config.yaml
-│   └── tools/
-│       ├── test.yaml
-│       ├── build.yaml
-│       └── git.yaml
+│   ├── test.yaml
+│   ├── build.yaml
+│   └── git.yaml
 └── mytools/
-    ├── config.yaml
-    └── tools/
-        └── mytool.yaml
+    └── mytool.yaml
 ```
 
 ### Tool Definition Format
