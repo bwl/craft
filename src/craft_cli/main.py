@@ -2,30 +2,12 @@
 Main entry point for Craft CLI Framework
 """
 import sys
-from pathlib import Path
 from .core import CraftCLI
-
-
-def find_domains_dir() -> Path:
-    """Find domains directory, checking multiple locations"""
-    # First check if we're in a project that has a domains/ directory
-    current = Path.cwd()
-    while current != current.parent:
-        domains_dir = current / "domains"
-        if domains_dir.exists():
-            return current
-        current = current.parent
-    
-    # Fall back to package location
-    package_dir = Path(__file__).parent
-    return package_dir.parent.parent
 
 
 def main() -> int:
     """Main CLI entry point"""
-    # Find the base path for domains
-    base_path = find_domains_dir()
-    cli = CraftCLI(base_path)
+    cli = CraftCLI()
     
     # Check for version flag
     if len(sys.argv) > 1 and sys.argv[1] in ["--version", "-v"]:

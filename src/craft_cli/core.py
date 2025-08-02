@@ -19,12 +19,8 @@ console = Console()
 class CraftCLI:
     """Main Craft CLI Framework class"""
     
-    def __init__(self, base_path: Optional[Path] = None):
-        """Initialize Craft CLI
-        
-        Args:
-            base_path: Base path for finding domains directory (legacy, ignored with config system)
-        """
+    def __init__(self):
+        """Initialize Craft CLI"""
         self.config_manager = ConfigManager()
         
         # Show startup checklist if enabled (skip in test environments)
