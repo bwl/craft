@@ -2,6 +2,37 @@
 
 *Trick Gemini into being actually useful*
 
+### What Actually Happens
+
+**Example 1: Deploy a Writing Assistant**
+```bash
+$ craft slate namer character --type=protagonist --culture=nordic
+```
+→ *Smart agent generates 5 culturally appropriate Nordic protagonist names with context and meaning*
+
+**Example 2: Fire Up a Code Quality Expert**
+```bash
+$ craft linting ruff check --fix src/
+```
+→ *Linting specialist scans your code, finds 23 issues, automatically fixes 19 of them, reports the 4 that need manual attention*
+
+**Example 3: Summon a Test Engineer**
+```bash
+$ craft coding test --coverage
+```
+→ *Testing expert runs your full test suite, generates coverage report, identifies untested code paths*
+
+### How AI Agents Discover and Use Tools
+
+When Claude (or any AI agent) needs to accomplish something, they can:
+
+1. **Explore domains**: `./craft --domains` shows all available specialist areas
+2. **Scope by domain**: `./craft linting` lists only code quality tools  
+3. **Get help**: `./craft linting ruff --help` explains exactly what each tool does
+4. **Execute with confidence**: `./craft linting ruff check --fix` - the system takes over from there
+
+The AI agent just runs `./craft` and the framework handles discovery, validation, and execution. No complex tool management needed.
+
 > ⚠️ **Friendly Disclaimer**: Most of the features promised below exist but some um... we will get back to you soon, dw 😅
 
 ## Fire Up Specialized Agents for Any Task
