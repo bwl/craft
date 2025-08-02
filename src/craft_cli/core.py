@@ -116,18 +116,18 @@ class CraftCLI:
             print("Use: craft <domain> to list domain tools")
             print("Add --noob flag for Rich UI tables")
     
-    def list_domain_tools(self, domain: str, human_mode: bool = False) -> None:
-        """List tools in a specific domain"""
+    def list_domain_tools(self, domain: str, human_mode: bool = False) -> bool:
+        """List tools in a specific domain. Returns True on success, False on error."""
         domain_dir = self.domains_dir / domain
         tools_dir = domain_dir / "tools"
         
         if not domain_dir.exists():
             print(f"ERROR: Domain '{domain}' not found")
-            return
+            return False
         
         if not tools_dir.exists():
             print(f"ERROR: No tools directory found for domain '{domain}'")
-            return
+            return False
         
         # Load domain config
         config_file = domain_dir / "config.yaml"
@@ -175,14 +175,16 @@ class CraftCLI:
             print("")
             print(f"Use: craft {domain} <tool> --help for tool-specific help")
             print("Add --noob flag for Rich UI tables")
+        
+        return True
     
-    def show_tool_help(self, domain: str, tool: str, human_mode: bool = False) -> None:
-        """Show help for a specific tool"""
+    def show_tool_help(self, domain: str, tool: str, human_mode: bool = False) -> bool:
+        """Show help for a specific tool. Returns True on success, False on error."""
         tool_file = self.domains_dir / domain / "tools" / f"{tool}.yaml"
         
         if not tool_file.exists():
             print(f"ERROR: Tool '{tool}' not found in domain '{domain}'")
-            return
+            return False
         
         config = yaml.safe_load(tool_file.read_text())
         name = config.get("name", tool)
@@ -204,6 +206,8 @@ class CraftCLI:
             print(help_text)
             print("")
             print("Add --noob flag for Rich UI panel")
+        
+        return True
     
     def run_tool(self, domain: str, tool: str, args: List[str]) -> int:
         """Execute a domain tool"""

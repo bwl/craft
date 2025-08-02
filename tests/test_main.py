@@ -62,7 +62,7 @@ class TestMain:
             result = main()
             
         captured = capsys.readouterr()
-        assert result == 0
+        assert result == 1  # Non-existent domain should return error code
         assert "ERROR: Domain 'nonexistent' not found" in captured.out
     
     def test_tool_help(self, capsys):

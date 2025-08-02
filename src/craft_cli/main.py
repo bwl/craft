@@ -47,8 +47,8 @@ def main() -> int:
     
     if len(sys.argv) == 2:
         # craft <domain> - list domain tools
-        cli.list_domain_tools(sys.argv[1], human_mode)
-        return 0
+        success = cli.list_domain_tools(sys.argv[1], human_mode)
+        return 0 if success else 1
     
     if len(sys.argv) >= 3:
         domain = sys.argv[1]
@@ -57,7 +57,7 @@ def main() -> int:
         # Check for help flag
         if len(sys.argv) > 3 and sys.argv[3] in ["--help", "-h"]:
             cli.show_tool_help(domain, tool, human_mode)
-            return 0
+            return 0  # Help should always return success, even for non-existent tools
         
         # Run the tool
         args = sys.argv[3:] if len(sys.argv) > 3 else []
